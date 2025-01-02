@@ -7,4 +7,4 @@ const RemedySchema = new mongoose.Schema({
   exercises: [String]
 });
 
-module.exports = mongoose.model('Remedy', RemedySchema);
+module.exports = mongoose.model('remedies', RemedySchema);

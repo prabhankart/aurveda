@@ -10,5 +10,5 @@ const plantSchema = new mongoose.Schema({
   methods_of_use: { type: [String] }
 });
 
-const Plant = mongoose.model('Plant', plantSchema);
+const Plant = mongoose.model('plants', plantSchema);
 module.exports = Plant;
