@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const RemedySchema = new mongoose.Schema({
-  problem: String,
-  solution: String,
-  plantRecommendations: [String],
-  exercises: [String]
+  problem: { type: String, required: true },
+  solution: { type: String, required: true },
+  plantRecommendations: { type: [String], required: true },
+  exercises: { type: [String], required: true },
 });
 
-module.exports = mongoose.model('remedies', RemedySchema);
+module.exports = mongoose.model('Remedy', RemedySchema);

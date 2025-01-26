@@ -2,11 +2,17 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path'); // for serving static files like images
 
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve uploaded images from the "uploads" directory
+// Serve static files from the 'uploads' folder
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Import routes
 const plantRoutes = require('./routes/plantRoutes');
@@ -17,7 +23,7 @@ const excerciseRoutes = require('./routes/excerciseRoutes');
 // Use routes
 app.use('/plants', plantRoutes);
 app.use('/remedies', remedyRoutes);
-app.use('/reviews', reviewRoutes);
+app.use('/reviews', reviewRoutes);  // Reviews route for handling review submission
 app.use('/excercise', excerciseRoutes);
 
 // MongoDB connection

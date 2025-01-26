@@ -5,21 +5,24 @@ const router = express.Router();
 // GET remedies based on health issue
 router.get('/', async (req, res) => {
   const { issue } = req.query;
-  if (!issue) return res.status(400).json({ message: 'Health issue is required.' });
+  if (!issue) {
+    return res.status(400).json({ message: 'Health issue is required.' });
+  }
 
   try {
     const remedies = await Remedy.find({
-      problem: { $regex: issue, $options: 'i' }
+      problem: { $regex: `^${issue}$`, $options: 'i' },
     });
     if (remedies.length > 0) {
       res.json(remedies);
     } else {
-      res.json({ message: `No remedies found for ${issue}` });
+      res.status(404).json({ message: `No remedies found for ${issue}` });
     }
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch remedies. Please try again later.' });
   }
 });
+
 
 // POST a new remedy
 router.post('/', async (req, res) => {
